@@ -17,7 +17,7 @@ npm install
 
 ## Usage
 
-Run commands from the `001-task-master` directory. The `--` separates npm arguments from the CLI command.
+Run commands from the `001-task-master` directory.
 
 ```sh
 npm run start add "Belanja"
