@@ -42,3 +42,39 @@ export async function handlerAdd(cmdName: string, ...args: string[]) {
 
   console.log(`Task added successfully: (ID: ${nextId})`)
 }
+
+export async function handlerList(cmdName: string, ...args: string[]) {
+  const dataPath = path.join(process.cwd(), "data.json");
+
+  let tasks: Task[] = [];
+
+  try {
+    const contents = await readFile(dataPath, "utf-8");
+
+    const data = JSON.parse(contents)
+
+    tasks = data.tasks;
+  } catch (e) {
+    tasks = []
+  }
+  const filterStatus = args[0]
+
+  if (!filterStatus) {
+    tasks.forEach((data) => {
+      console.log(`ID ${data.id}: ${data.description} - ${data.status} - ${data.createdAt} - ${data.updatedAt}`)
+    })
+    return;
+  }
+
+  if (!["todo", "in-progress", "done"].includes(filterStatus)) {
+    throw new Error("Invalid status filter")
+  }
+
+  tasks = tasks.filter(task => task.status == filterStatus)
+
+  tasks.forEach((data) => {
+    console.log(`ID ${data.id}: ${data.description} - ${data.status} - ${data.createdAt} - ${data.updatedAt}`)
+  })
+
+  return;
+}
