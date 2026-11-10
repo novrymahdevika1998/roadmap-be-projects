@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "description": "Belanja",
+      "status": "todo",
+      "createdAt": "2026-11-10T08:08:19.539Z",
+      "updatedAt": "2026-11-10T08:08:19.539Z"
+    },
+    {
+      "id": 2,
+      "description": "Puasa",
+      "status": "todo",
+      "createdAt": "2026-11-10T08:08:30.635Z",
+      "updatedAt": "2026-11-10T08:08:30.635Z"
+    },
+    {
+      "id": 3,
+      "description": "Puasa",
+      "status": "todo",
+      "createdAt": "2026-11-10T08:08:59.004Z",
+      "updatedAt": "2026-11-10T08:08:59.004Z"
+    }
+  ]
+}
