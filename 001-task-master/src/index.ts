@@ -1,5 +1,5 @@
 import { CommandsRegistry, registerCommand, runCommand } from "./command";
-import { handlerAdd, handlerList } from "./handlers/tasks";
+import { handlerAdd, handlerDelete, handlerList, handlerUpdate } from "./handlers/tasks";
 
 async function main() {
   const cmdRegistry: CommandsRegistry = {};
@@ -9,6 +9,8 @@ async function main() {
 
   registerCommand(cmdRegistry, "add", handlerAdd)
   registerCommand(cmdRegistry, "list", handlerList)
+  registerCommand(cmdRegistry, "delete", handlerDelete)
+  registerCommand(cmdRegistry, "update", handlerUpdate)
   
   try {
     await runCommand(cmdRegistry, cmdName, ...cmdArgs)

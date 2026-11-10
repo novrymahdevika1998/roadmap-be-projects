@@ -78,3 +78,73 @@ export async function handlerList(cmdName: string, ...args: string[]) {
 
   return;
 }
+
+export async function handlerUpdate(cmdName: string, ...args: string[]) {
+  const dataPath = path.join(process.cwd(), "data.json");
+
+  let tasks: Task[] = [];
+
+  try {
+    const contents = await readFile(dataPath, "utf-8");
+    const data: TaskData = JSON.parse(contents)
+    tasks = data.tasks;    
+  } catch (error) {
+    tasks = []
+  }
+
+  if (tasks.length === 0) {
+    console.log("No tasks found")
+    return;
+  }
+
+  const taskId = args[0];
+  const newDescription = args[1];
+
+  const taskIndex = tasks.findIndex(task => task.id == +taskId)
+
+  if (taskIndex === -1) {
+    console.log("Task not found")
+    return;
+  }
+
+  tasks[taskIndex].description = newDescription;
+  tasks[taskIndex].updatedAt = new Date();
+
+  await writeFile(dataPath, `${JSON.stringify({ tasks }, null, 2)}\n`, "utf-8");
+
+  console.log("Task updated successfully")
+}
+
+export async function handlerDelete(cmdName: string, ...args: string[]) {
+  const dataPath = path.join(process.cwd(), "data.json");
+
+  let tasks: Task[] = [];
+
+  try {
+    const contents = await readFile(dataPath, "utf-8");
+    const data: TaskData = JSON.parse(contents)
+    tasks = data.tasks;    
+  } catch (error) {
+    tasks = []
+  }
+
+  if (tasks.length === 0) {
+    console.log("No tasks found")
+    return;
+  }
+
+  const taskId = args[0];
+
+  const taskIndex = tasks.findIndex(task => task.id == +taskId)
+
+  if (taskIndex === -1) {
+    console.log("Task not found")
+    return;
+  }
+
+  tasks.splice(taskIndex, 1);
+
+  await writeFile(dataPath, `${JSON.stringify({ tasks }, null, 2)}\n`, "utf-8");
+
+  console.log("Task deleted successfully")
+}
