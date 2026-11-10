@@ -2,6 +2,8 @@
 
 A TypeScript command-line task manager. Tasks are stored in a JSON file in the current working directory.
 
+Project: [roadmap.sh Task Tracker](https://roadmap.sh/projects/task-tracker)
+
 ## Requirements
 
 - Node.js
